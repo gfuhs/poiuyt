@@ -1,44 +1,142 @@
 <html>
-<head>
-	<title>inc/../doc/Css.html</title>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-	<link rel="stylesheet" type="text/css" href="theme.css">
-</head>
-<body>
-<div id="presentation">
-	<h1>      Css.c
-</h1>
-<b>Auteur(s) :</b>
-<ol>
-<li>    Fuhs
-</li>
-</ol>
-<b>Version :</b>    1.0
- <br> 
-<b>Date :</b>       10 Novembre 2012
- <br>
-<p>     Ecrit un fichier CSS par défault.
-</p>
+	<head>
+		<title>inc/../doc/Css.html</title>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+		<link rel="stylesheet" type="text/css" href="reset.css">
+		<link rel="stylesheet" type="text/css" href="theme.css">
+	</head>
 
+	<body>
+		<div id="presentation">
+			<h1>      Css.c</h1>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<b>Auteur(s) :</b>
+			<ol>
+				<li>    Fuhs</li>
+				<li>    Moreau</li>
+			</ol>
 
- On a ici les fonctions permettant d'écrire un fichier de 
+			<b>Version :</b>   1.0
+			<br>
 
- style CSS prédéfinis pour une page html.
+			<b>Date :</b>       10 Novembre 2012
+			<br>
 
-</div>
-<div id="fonction">
-	<h2>         int makeCss(int theme, char* path)
-</h2>
-<p>      Fonction crée une fichier CSS prédéfinis
-</p>
-<b>Paramètre(s) :</b>
-<ol>
-<li>      theme	est le code d'un style prédéfinis .
-</li>
-<li>      path	est le chemin au répertoire où on veut placer le fichier css	
-</li>
-</ol>
-<p><b>Return</b>      Un int représentant un code de sortie.
- </p></div>
-</body>
+			<p>
+				&nbsp
+			</p>
+			<p>
+			     Ecrit un fichier CSS par défaut.
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			
+			 On a ici les fonctions permettant d'écrire un fichier de 
+			 style CSS prédéfini pour une page html.
+		</div>
+			<p>
+				&nbsp
+			</p>
+		<div id="fonction">
+			<h2>			void themeCreationD(FILE * fin)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+					Fonction  créant un fichier.css qui contiendra le thème des pages html
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>		fin		est le fichier dans lequel on doit écrire le code css qui sera appliqué aux pages html</li>
+		</div>
+			<p>
+				&nbsp
+			</p>
+			</ol>
+
+		<div id="fonction">
+			<h2>			void printReset(FILE * reset)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+					Fonction créant un fichier de reset pour le css
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<p>
+		Fonction créant un fichier de reset pour le css afin d'optimiser le nombre de navigateurs prenant en compte notre theme css
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>		reset	est le fichier dans lequel on doit écrire le code de reset css</li>
+		</div>
+			<p>
+				&nbsp
+			</p>
+			</ol>
+
+		<div id="fonction">
+			<h2>         int makeCss(int theme, char* path)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+			      Fonction créant un fichier CSS prédéfini
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>      theme	est le code d'un style prédéfini .</li>
+				<li>      path	est le chemin au répertoire où on veut placer les fichiers css	</li>
+			</ol>
+
+			<p>
+				<b>Return</b><br><span>     Un int représentant un code de sortie.
+</span>			</p>
+
+			<p>
+				&nbsp
+			</p>
+		</div>
+			<p>
+				&nbsp
+			</p>
+	</body>
+
 </html>

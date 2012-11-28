@@ -1,67 +1,189 @@
 #include "Html.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 FILE* newHtml(char *name)
 {
  	FILE* fout;
  	
- 	if((fout=fopen(name,"w"))== NULL)
+ 	if( (fout = fopen(name, "w")) == NULL)
+	{
  		return NULL;
+	}
  		
- 	fprintf(fout,"<html>\n<head>\n\t<title>%s</title>\n\t<meta http-equiv=\"content-type\" content=\"text/html;charset=UTF-8\"/>\n\t<link rel=\"stylesheet\" type=\"text/css\" href=\"theme.css\">\n</head>\n<body>\n",name);
+ 	fprintf(fout, "<html>\n\t<head>\n\t\t<title>%s</title>\n\t\t<meta http-equiv=\"content-type\" content=\"text/html;charset=UTF-8\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"reset.css\">\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"theme.css\">\n\t</head>\n\n\t<body>\n", name);
+
  	return fout;	
 }
+
  
 int closeHtml(FILE* file)
 {
-	fprintf(file,"</body>\n</html>\n"); 
+	fprintf(file, "\t</body>\n\n</html>\n"); 
 	return fclose(file); 	
 }
 
- void newBalise(FILE* file, int code, char* String)
+
+void putTab (FILE * file, int nb)
 {
-	switch(code) {
+	int i;
+	
+	for(i = 0; i < nb; i++)
+	{
+		fprintf(file, "\t");
+	}
+}
+
+
+void putSpace (FILE * file, int nb)
+{
+	int i;
+	
+	for(i = 0; i < nb; i++)
+	{
+		fprintf(file, "\t\t\t<p>\n\t\t\t\t&nbsp\n\t\t\t</p>\n");
+	}
+}
+
+
+void newBalise(FILE* file, int code, char* String)
+{
+	char * tmp;
+	
+	switch(code) 
+	{
 		case -3 :
-			fprintf(file,"</ol>\n");
+			putTab(file, 3);
+			fprintf(file, "</ol>\n\n");
 			break;	
+
 		case -2 :	
-			fprintf(file,"<b>%s :</b>\n<ol>\n",String);
+			putTab(file, 3);
+			fprintf(file, "<b>%s :</b>\n", String);
+			putTab(file, 3);
+			fprintf(file, "<ol>\n");
 			break;
+	
 		case -1 :
-			fprintf(file,"%s\n",String);
+			putTab(file, 2);
+			fprintf(file, "\t%s", String);
 			break;
+
 		case 0 :
-			fprintf(file,"<div id=\"presentation\">\n\t<h1>%s</h1>\n",String);
+			putTab(file, 2);
+			fprintf(file, "<div id=\"presentation\">\n");
+			putTab(file, 3);
+			
+			tmp = (char *)malloc(sizeof(char) * (strlen(String) + 1));
+			if(tmp == NULL)
+			{	
+				fprintf(stderr, "Error in memory\n");
+				exit(1);
+			}
+			
+			strcpy(tmp, String);
+			tmp[strlen(String) - 1] = '\0';
+			
+			fprintf(file, "<h1>%s</h1>\n", tmp);
+			putSpace(file, 4);
+			free(tmp);
 			break;
 
 		case 2 :
-			fprintf(file,"<b>Version :</b> %s <br> \n",String);
+			putTab(file, 3);
+			fprintf(file, "<b>Version :</b>%s", String);
+			putTab(file, 3);
+			fprintf(file, "<br>\n\n");
 			break;
 		case 3 :
-			fprintf(file,"<b>Date :</b> %s <br>\n",String);
+			putTab(file, 3);
+			fprintf(file, "<b>Date :</b> %s", String);
+			putTab(file, 3);
+			fprintf(file, "<br>\n\n");
+			putSpace(file, 1);
 			break;
+
 		case 4 :
-			fprintf(file,"<p>%s</p>\n",String);
+			putTab(file, 3);
+			fprintf(file, "<p>\n");
+			putTab(file, 2);
+			fprintf(file, "\t%s", String);
+			putTab(file, 3);
+			fprintf(file, "</p>\n\n");
+			putSpace(file, 1);
 			break;
+
 		case 5 :
-			fprintf(file,"<p>%s</p>",String);
+			putTab(file, 3);
+			fprintf(file, "<p>\n%s", String);
+			putTab(file, 3);
+			fprintf(file, "</p>\n\n");
+			putSpace(file, 1);
 			break;
+
 		case 6 :
-			fprintf(file,"<div id=\"fonction\">\n\t<h2>%s</h2>\n",String);
+			putTab(file, 2);
+			fprintf(file, "<div id=\"fonction\">\n");
+			putTab(file, 3);
+			
+			tmp = (char *)malloc(sizeof(char) * (strlen(String) + 1));
+			if(tmp == NULL)
+			{	
+				fprintf(stderr, "Error in memory\n");
+				exit(1);
+			}
+			
+			strcpy(tmp, String);
+			tmp[strlen(String) - 1] = '\0';
+			
+			fprintf(file, "<h2>%s</h2>\n", tmp);
+			free(tmp);
+			putSpace(file, 2);
 			break;
+
 		case 1 :
 		case 7 :
-			fprintf(file,"<li>%s</li>\n",String);
+			putTab(file, 4);
+			
+			tmp = (char *)malloc(sizeof(char) * (strlen(String) + 1));
+			if(tmp == NULL)
+			{	
+				fprintf(stderr, "Error in memory\n");
+				exit(1);
+			}
+			
+			strcpy(tmp, String);
+			tmp[strlen(String) - 1] = '\0';
+			
+			fprintf(file, "<li>%s</li>\n", tmp);
+			free(tmp);
 			break;
+
 		case 8 :
-			fprintf(file,"<p><b>Return</b> %s </p>",String);
+			putTab(file, 3);
+			fprintf(file, "<p>\n");
+			putTab(file, 4);
+			fprintf(file, "<b>Return</b><br><span>%s</span>", String);
+			putTab(file, 3);
+			fprintf(file, "</p>\n\n");
+			putSpace(file, 1);
 			break;
+
 		case 9 :
-			fprintf(file,"<p><b>Bug</b> %s</p>",String);
-			break;		
+			putTab(file, 3);
+			fprintf(file, "<p>\n");
+			putTab(file, 3);
+			fprintf(file, "<b>Bug</b>%s", String);
+			putTab(file, 2);
+			fprintf(file, "</p>");
+			putSpace(file, 1);
+			break;	
+	
 		case 10 :
-			fprintf(file,"</div>\n");
+			putTab(file, 2);
+			fprintf(file, "</div>\n");
+			putSpace(file, 1);
 			break;
 	}
 }

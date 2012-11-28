@@ -1,72 +1,199 @@
 <html>
-<head>
-	<title>inc/../doc/Html.html</title>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-	<link rel="stylesheet" type="text/css" href="theme.css">
-</head>
-<body>
-<div id="presentation">
-	<h1>      Html.c
-</h1>
-<b>Auteur(s) :</b>
-<ol>
-<li>    Fuhs
-</li>
-</ol>
-<b>Version :</b>    1.0
- <br> 
-<b>Date :</b>       10 Novembre 2012
- <br>
-<p>     Ecrit un fichier html .
-</p>
+	<head>
+		<title>inc/../doc/Html.html</title>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+		<link rel="stylesheet" type="text/css" href="reset.css">
+		<link rel="stylesheet" type="text/css" href="theme.css">
+	</head>
 
+	<body>
+		<div id="presentation">
+			<h1>      Html.c</h1>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<b>Auteur(s) :</b>
+			<ol>
+				<li>    Fuhs</li>
+				<li>    Moreau</li>
+			</ol>
 
- On a ici les fonctions permettant d'écrire un fichier  
+			<b>Version :</b>   1.0
+			<br>
 
- html utilisant un fichier CSS construit avec les fonctions
+			<b>Date :</b>       10 Novembre 2012
+			<br>
 
- contenu dans Css.h.
+			<p>
+				&nbsp
+			</p>
+			<p>
+			     Ecrit un fichier html .
+			</p>
 
-</div>
-<div id="fonction">
-	<h2>         FILE* newHtml(char* name)
-</h2>
-<p>      Fonction créant  un fichier html 
-</p>
-<p>		Le fichier crée aura déja la balise en-tête "head" de completer et sa tête de lecture possitionner après la balise ouvrante <body>
-</p><b>Paramètre(s) :</b>
-<ol>
-<li>      name	est le nom du fichier html a créer .
-</li>
-</ol>
-<p><b>Return</b>      Un FILE* qui est un pointeur sur le fichier html.
- </p></div>
-<div id="fonction">
-	<h2>         void newBalise(File* file, int code, char* String)
-</h2>
-<p>      Fonction écrivant une chaine de caractère dans une balise 
-</p>
-<b>Paramètre(s) :</b>
-<ol>
-<li>      file	est un FILE* correspondant au fichier html dans lequel on doit mettre la balise .
-</li>
-<li>      code	est un int correspondant à une balise .
-</li>
-<li>		String est la chaine de caractère a mettre dans la balise
-</li>
-</div>
-</ol>
-<div id="fonction">
-	<h2>			int closeHtml(FILE* file)
-</h2>
-<p>		Fonction fermant un fichier crée par la fonction newHtml
-</p>
-<b>Paramètre(s) :</b>
-<ol>
-<li>		file est un pointeur sur un fichier crée par la fonction newHtml
-</li>
-</ol>
-<p><b>Return</b> 		un int correspondant à un code de sortie
- </p></div>
-</body>
+			<p>
+				&nbsp
+			</p>
+			
+			 On a ici les fonctions permettant d'écrire un fichier  
+			 html utilisant un fichier CSS construit avec les fonctions
+			 contenu dans Css.h.
+		</div>
+			<p>
+				&nbsp
+			</p>
+		<div id="fonction">
+			<h2>         FILE* newHtml(char* name)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+			      Fonction créant un fichier html 
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<p>
+    Le fichier créé aura déja la balise en-tête "head" de complété et sa tête de lecture possitionnée après la balise ouvrante <body>
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>      name	est le nom du fichier html à créer .</li>
+			</ol>
+
+			<p>
+				<b>Return</b><br><span>     Un FILE* qui est un pointeur sur le fichier html.
+</span>			</p>
+
+			<p>
+				&nbsp
+			</p>
+		</div>
+			<p>
+				&nbsp
+			</p>
+		<div id="fonction">
+			<h2>         void newBalise(File* file, int code, char* String)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+			      Fonction écrivant une chaine de caractères dans une balise 
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>      file	est un FILE* correspondant au fichier html dans lequel on doit mettre la balise .</li>
+				<li>      code	est un int correspondant à une balise .</li>
+				<li>		String est la chaine de caractère a mettre dans la balise</li>
+		</div>
+			<p>
+				&nbsp
+			</p>
+			</ol>
+
+		<div id="fonction">
+			<h2>		int closeHtml(FILE* file)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				Fonction fermant un fichier créé par la fonction newHtml
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>	file est un pointeur sur un fichier créé par la fonction newHtml</li>
+			</ol>
+
+			<p>
+				<b>Return</b><br><span>	un int correspondant à un code de sortie
+</span>			</p>
+
+			<p>
+				&nbsp
+			</p>
+		</div>
+			<p>
+				&nbsp
+			</p>
+		<div id="fonction">
+			<h2>		void putTab (FILE * file, int nb)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+			 	Fonction mettant un nombre de tabulations pour indenter le fichier html
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>	file est un pointeur sur un fichier créé par la fonction newHtml</li>
+				<li>	nb est le nombre de tabulations à insérer dans le fichier pour indenter proprement le code html</li>
+		</div>
+			<p>
+				&nbsp
+			</p>
+			</ol>
+
+		<div id="fonction">
+			<h2> 		void putSpace (FILE * file, int nb)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				Fonction mettant un nombre d'espaces contribuant au css
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>	file est un pointeur sur un fichier créé par la fonction newHtml</li>
+				<li>	nb est le nombre d'espaces à insérer dans le fichier pour clarifier la page html</li>
+		</div>
+			<p>
+				&nbsp
+			</p>
+	</body>
+
 </html>
