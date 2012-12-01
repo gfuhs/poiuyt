@@ -4,20 +4,20 @@
 /**
  * \file      Main.c
  * \author    Fuhs
+ * \author    Moreau
  * \version   1.0
  * \date      10 Novembre 2012
- * \brief     Définit la fonctions principal du programme.
+ * \brief     Define the main function of the program.
  *
- * Cette fonctions permet de faire tourner le programme
- * docmycode en gestionnant les argumants passer en paramètre.
+ * This function contribute to run the docmycode program by managing the arguments.
  */
  
  /**
  * \fn         int main(int argc, char* argv[])
- * \brief      Fonction principal du programme
- * \param      argc	Nombre d'argument passer en paramètre au programme.
- * \param      argv	Tableau des arguments passer en paramètre au programme.
- * \return     un int représentant un code de sortie.
+ * \brief      Main function of the program.
+ * \param      argc	number of arguments on the command line
+ * \param      argv	table of these arguments.
+ * \return     an integer which is a special exit code.
  */
  int main(int argc, char* argv[]);
  #endif

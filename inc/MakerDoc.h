@@ -4,19 +4,19 @@
 /**
  * \file      MakerDoc.c
  * \author    Fuhs
+ * \author    Moreau
  * \version   1.0
  * \date      10 Novembre 2012
- * \brief     Définit les fonctions permettant de construire la documentation.
+ * \brief     Implement the functions needed to build the documentation.
  *
- * Les fonctions présentent ici permettent de créer à partir de
- * fichier un fichier html de la documentations de celui-ci.
+ * Functions which create a documentation of an html file.
  */
  
   /**
  * \fn         int makeDoc(char* file)
- * \brief      Fonction crée une documentation html
- * \param      file	est le nom ou l'adresse du fichier dont on veut faire la documentation html.
- * \return     Un int représentant un code de sortie.
+ * \brief      Create an html documentation.
+ * \param      file	is the name of the file which the program has to create the documentation.
+ * \return     An integer which is a special exit code.
  */
  int makeDoc(char* file);
  #endif
