@@ -1,42 +1,127 @@
 <html>
-<head>
-	<title>inc/../doc/MakerDoc.html</title>
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
-	<link rel="stylesheet" type="text/css" href="theme.css">
-</head>
-<body>
-<div id="presentation">
-	<h1>      MakerDoc.c
-</h1>
-<b>Auteur(s) :</b>
-<ol>
-<li>    Fuhs
-</li>
-</ol>
-<b>Version :</b>    1.0
- <br> 
-<b>Date :</b>       10 Novembre 2012
- <br>
-<p>     Définit les fonctions permettant de construire la documentation.
-</p>
+	<head>
+		<title>doc/MakerDoc.html</title>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+		<link rel="stylesheet" type="text/css" href="reset.css">
+		<link rel="stylesheet" type="text/css" href="theme.css">
+	</head>
 
+	<body>
+		<div id="presentation">
+			<h1>      MakerDoc.c</h1>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<b>Fonction(s) :</b>
+			<ol>
+			<li><a href="#fonc_0">         int makeDoc(Ens* ens)</a></li>			<li><a href="#fonc_1">			int baliseCom(char* buff, char* string)</a></li>			</ol>
 
- Les fonctions présentent ici permettent de créer à partir de
+			<b>Auteur(s) :</b>
+			<ol>
+				<li>    Fuhs</li>
+				<li>    Moreau</li>
+			</ol>
 
- fichier un fichier html de la documentations de celui-ci.
+			<b>Version :</b>   2.0
+			<br>
 
-</div>
-<div id="fonction">
-	<h2>         int makeDoc(char* file)
-</h2>
-<p>      Fonction crée une documentation html
-</p>
-<b>Paramètre(s) :</b>
-<ol>
-<li>      file	est le nom ou l'adresse du fichier dont on veut faire la documentation html.
-</li>
-</ol>
-<p><b>Return</b>      Un int représentant un code de sortie.
- </p></div>
-</body>
+			<b>Date :</b>       2 Décembre 2012
+			<br>
+
+			<p>
+				&nbsp
+			</p>
+			<p>
+			     Définit les fonctions permettant de construire la documentation.
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			
+			 Les fonctions présentent ici permettent de créer à partir de
+			 fichier un fichier html de la documentations de celui-ci.
+		</div>
+			<p>
+				&nbsp
+			</p>
+		<div id="fonction">
+			<h2 id="fonc_0">         int makeDoc(Ens* ens)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+			      Fonction crée une documentation html
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>      ens	est la structure contenant plusieurs fichiers correspondant à une même documentation html.</li>
+			</ol>
+
+			<p>
+				<b>Return</b><br><span>     Un int représentant un code de sortie.</span>			</p>
+
+			<p>
+				&nbsp
+			</p>
+		</div>
+			<p>
+				&nbsp
+			</p>
+		<div id="fonction">
+			<h2 id="fonc_1">			int baliseCom(char* buff, char* string)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+					Fonction qui renvoie le code d'une balise html 
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<p>
+	On fournit dans buff une chaine de caractère une balise spécial ainsi que le contenu de cette balise
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>		buff est une chaine de caractère qui contient une balise spécial correspondant à une balise html</li>
+				<li>		string est un pointeur sur une chaine de caractère à mettre dans la balise html</li>
+			</ol>
+
+			<p>
+				<b>Return</b><br><span> 	un int correspondant à la balise html</span>			</p>
+
+			<p>
+				&nbsp
+			</p>
+		</div>
+			<p>
+				&nbsp
+			</p>
+	</body>
+
 </html>

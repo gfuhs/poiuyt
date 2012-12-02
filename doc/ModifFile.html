@@ -1,0 +1,201 @@
+<html>
+	<head>
+		<title>doc/ModifFile.html</title>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+		<link rel="stylesheet" type="text/css" href="reset.css">
+		<link rel="stylesheet" type="text/css" href="theme.css">
+	</head>
+
+	<body>
+		<div id="presentation">
+			<h1>      MofifFile.c</h1>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<b>Fonction(s) :</b>
+			<ol>
+			<li><a href="#fonc_0">         FILE* fusionFile (char *fileC, char* fileH, FILE* fileHtml)</a></li>			<li><a href="#fonc_1">		int ordreFile(char* file, char* name)</a></li>			<li><a href="#fonc_2">         void copieCom(FILE* fin, FILE* fout, FILE* html)</a></li>			<li><a href="#fonc_3">         FILE* fusionFile(char *fileC, char* fileH, FILE* fileHtml)</a></li>			<li><a href="#fonc_4">         void close_fusionFile(FILE* file)</a></li>			</ol>
+
+			<b>Auteur(s) :</b>
+			<ol>
+				<li>    Fuhs</li>
+				<li>    Moreau</li>
+			</ol>
+
+			<b>Version :</b>   2.0
+			<br>
+
+			<b>Date :</b>       2 Décembre 2012
+			<br>
+
+			<p>
+				&nbsp
+			</p>
+			<p>
+			     Bibliothèque permettant la manipulation de fichier.
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			
+			 Bibliothèque contenant les fonctions permettant de manipuler un ensemble de fichier.
+		</div>
+			<p>
+				&nbsp
+			</p>
+		<div id="fonction">
+			<h2 id="fonc_0">         FILE* fusionFile (char *fileC, char* fileH, FILE* fileHtml)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+			      Fonction fusionnant les commentaires des fichiers c et h et qui fait la liste des fonctions dans le fichier html 
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>      fileC	est le nom du fichier c a fusionner </li>
+				<li>      fileH	est le nom du fichier h a fusionner </li>
+				<li>      fileHtml	est un pointeur sur le fichier HTML qui correspond a la documentation du fichier c et h  </li>
+			</ol>
+
+			<p>
+				<b>Return</b><br><span>     Un FILE* qui est un pointeur sur le fichier temporaire résultant de la fusion des deux fichiers c et h.</span>			</p>
+
+			<p>
+				&nbsp
+			</p>
+		</div>
+			<p>
+				&nbsp
+			</p>
+		<div id="fonction">
+			<h2 id="fonc_1">		int ordreFile(char* file, char* name)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				Fonction qui détermine si le fichier contient la balise d'en-tête	
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>		file nom du fichier à tester s'il contient la balise d'en-tête</li>
+				<li>		name est la variable où on stockera le nom de l'ensemble de fichier si on trouve la balise d'en-tête </li>
+			</ol>
+
+			<p>
+				<b>Return</b><br><span>		Retourne 1 si oui sinon 0</span>			</p>
+
+			<p>
+				&nbsp
+			</p>
+		</div>
+			<p>
+				&nbsp
+			</p>
+		<div id="fonction">
+			<h2 id="fonc_2">         void copieCom(FILE* fin, FILE* fout, FILE* html)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+			      Fonction copie les commentaires d'un fichier dans un autre et fait la liste des fonctions dans le fichier d'entrée 
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>      fin pointeur sur un fichier d'entrée</li>
+				<li>      fout pointeur sur un fichier de sortie </li>
+				<li>      html	pointeur sur le fichier HTML qui correspond a la documentation du fichier d'entré  </li>
+		</div>
+			<p>
+				&nbsp
+			</p>
+			</ol>
+
+		<div id="fonction">
+			<h2 id="fonc_3">         FILE* fusionFile(char *fileC, char* fileH, FILE* fileHtml)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+			      Fonction qui fusionne les commentaires de 2 fichiers un c et h 
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>      fileC	est le chemin vers le fichier c.</li>
+				<li>		fileH est le chemin vers le fichier h.</li>
+				<li>		fileHtml est un pointeur sur le fichier correspondant à la documentation du fichier c et h</li>
+			</ol>
+
+			<p>
+				<b>Return</b><br><span>     Renvoie un pointeur sur le fichier obtenue après fusions des commentaires du fichierc avec le fichier h</span>			</p>
+
+			<p>
+				&nbsp
+			</p>
+		</div>
+			<p>
+				&nbsp
+			</p>
+		<div id="fonction">
+			<h2 id="fonc_4">         void close_fusionFile(FILE* file)</h2>
+			<p>
+				&nbsp
+			</p>
+			<p>
+				&nbsp
+			</p>
+			<p>
+			      Fonction qui ferme un fichier fusionner et le détruit 
+			</p>
+
+			<p>
+				&nbsp
+			</p>
+			<b>Paramètre(s) :</b>
+			<ol>
+				<li>      file	est le pointeur sur le fichier fusionner</li>
+		</div>
+			<p>
+				&nbsp
+			</p>
+	</body>
+
+</html>

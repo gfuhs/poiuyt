@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "Html.h"
+#include "ModifFile.h"
 
 
 /**
@@ -82,44 +83,24 @@
 		return -1; 		
  }
 
-int makeDoc(char* file)
+int makeDoc(Ens* ens)
 {
 	FILE* fin;
 	FILE* fout;
-	int size_file=strlen(file);
-	char* fout_name = (char*)malloc(sizeof(char)*(size_file+12));
 	char read_com =0;
 	char list_balise=0;
 	char buffer [1024];
 	int balise;
 	char* string;
 
-	if( (string = strrchr(file,'/')) == NULL)
-	{
-	    strcpy(fout_name,"doc/");
-	    strcat(fout_name,file);
-	    size_file=strlen(fout_name);
-	    fout_name[size_file-1]='h';fout_name[size_file]='t';fout_name[size_file+1]='m';fout_name[size_file+2]='l';fout_name[size_file+3]='\0';	
-	}
-	else
-	{
-	  strcpy(fout_name,file);
-	  string = strrchr(fout_name,'/');
-	  string[1]='\0';
-	  strcat(string,"../doc/");
-	  string = strrchr(fout_name,'/');
-	  string[1]='\0';
-	  strcat(string,strrchr(file,'/')+1);
-	  size_file=strlen(fout_name);
-	  fout_name[size_file-1]='h';fout_name[size_file]='t';fout_name[size_file+1]='m';fout_name[size_file+2]='l';fout_name[size_file+3]='\0';		
-	}
-	fin = fopen(file,"r");
-	fout = newHtml(fout_name);
-		
+	fout = newHtml(ens->file);
+	fin = fusionFile(ens-> path_file_c, ens-> path_file_h, fout);
+
+	Fonc_num = 0;
 	while(feof(fin)==0)
 	{
 		fgets(buffer,1024,fin);		
-		if(strstr(buffer,"/*") != NULL )
+		if(strstr(buffer,"/**") != NULL )
 		{
 			read_com = 1;
 			continue;			
@@ -135,7 +116,8 @@ int makeDoc(char* file)
 	
 		if( read_com != 0)
 		{
-			balise = baliseCom(buffer,&string);
+			if( (balise = baliseCom(buffer,&string)) == 0)
+			  continue;
 			if(list_balise == 1 && balise != 1)
 			{
 				newBalise(fout,-3,NULL);
@@ -163,8 +145,6 @@ int makeDoc(char* file)
 	}
 	
 	closeHtml(fout);
-	fclose(fin);
-	free(fout_name);
-		
+	close_fusion(fin);
 	return 1;
 }
