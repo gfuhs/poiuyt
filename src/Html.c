@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+int Fonc_num = 0;
+
 FILE* newHtml(char *name)
 {
  	FILE* fout;
@@ -42,7 +44,7 @@ void putSpace (FILE * file, int nb)
 	
 	for(i = 0; i < nb; i++)
 	{
-		fprintf(file, "\t\t\t<p>\n\t\t\t\t&nbsp\n\t\t\t</p>\n");
+		fprintf(file, "\t\t\t<p>\n\t\t\t\t&nbsp\n\t\t\t</p>\n\n");
 	}
 }
 
@@ -137,7 +139,9 @@ void newBalise(FILE* file, int code, char* String)
 			strcpy(tmp, String);
 			tmp[strlen(String) - 1] = '\0';
 			
-			fprintf(file, "<h2>%s</h2>\n", tmp);
+			fprintf(file, "<h2 id=\"fonc_%d\">%s</h2>\n", Fonc_num, tmp);
+			Fonc_num++;
+			
 			free(tmp);
 			putSpace(file, 2);
 			break;
@@ -175,7 +179,7 @@ void newBalise(FILE* file, int code, char* String)
 			strcpy(tmp, String);
 			tmp[strlen(String) - 1] = '\0';
 			
-			fprintf(file, "<b>Return</b><br><span>%s</span>", tmp);
+			fprintf(file, "<b>Return</b><br><span>%s</span>\n", tmp);
 			free(tmp);
 			
 			putTab(file, 3);
@@ -202,14 +206,13 @@ void newBalise(FILE* file, int code, char* String)
 			free(tmp);
 			
 			putTab(file, 2);
-			fprintf(file, "</p>");
+			fprintf(file, "</p>\n");
 			putSpace(file, 1);
 			break;	
 	
 		case 10 :
 			putTab(file, 2);
-			fprintf(file, "</div>\n");
-			putSpace(file, 1);
+			fprintf(file, "</div>\n\n");
 			break;
 			
 		case 11 :
@@ -241,8 +244,10 @@ void newBalise(FILE* file, int code, char* String)
 			strcpy(tmp, String);
 			tmp[strlen(String) - 1] = '\0';
 			
-			fprintf(file, "<a href=\"%s#%s\">%s</a>", (char *)file, tmp, tmp);
+			fprintf(file, "<li><a href=\"#fonc_%d\">%s</a></li>\n", Fonc_num, tmp);
+			Fonc_num++;
 			free(tmp);
 			break;
+		
 	}
 }

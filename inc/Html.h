@@ -2,12 +2,15 @@
 #define HTML_H
 
 #include <stdio.h>
+
+extern int Fonc_num;
+
 /**
  * \file      Html.c
  * \author    Fuhs
  * \author    Moreau
- * \version   1.0
- * \date      10 Novembre 2012
+ * \version   2.0
+ * \date      2 Décembre 2012
  * \brief     Create an html file.
  *
  * Functions with which the program can create an html file using a css file built with the functions wrote in Css.c
@@ -54,5 +57,6 @@
  * \param	nb	is the number of spaces to insert
 */
  void putSpace (FILE * file, int nb);
+
 
 #endif

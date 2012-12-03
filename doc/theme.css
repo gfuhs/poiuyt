@@ -9,13 +9,18 @@ body
 }
 
 
+a
+{
+	color: white;
+}
+
 #presentation
 {
-	background: url(images/header.png);
+	display: block;
+	background: url(images/divbg.png);
 	position: relative;
 	width: 800px;
-	height: 330px;
-	margin: 0 auto;
+	margin: 10px 0 10px 250px;
 }
 
 #presentation h1
@@ -36,15 +41,15 @@ li
 
 ol
 {
-	margin: 0 0 27 50;
+	margin: 0 0 27px 50px;
 }
 
 #fonction
 {
-	padding: 10 0 10 10;
+	padding: 10px 0 10px 10px;
 	display: block;
 	float: left;
-	margin: 25px 0 10 300px;
+	margin: 50px 0 10px 300px;
 	position: relative;
 	background-color: grey;
 	width: 600px;box-shadow: 1px 0px 8px #000000;
@@ -64,6 +69,6 @@ ol
 
 #fonction span
 {
-	padding: 0 0 0 40;
+	padding: 0 0 0 40px;
 }
 

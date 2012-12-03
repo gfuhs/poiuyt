@@ -7,8 +7,8 @@
  * \file      Css.c
  * \author    Fuhs
  * \author    Moreau
- * \version   1.0
- * \date      10 Novembre 2012
+ * \version   2.0
+ * \date      2 Décembre 2012
  * \brief     Create a default css file.
  *
  * Functions with which we can create a css file with a css style defined.
