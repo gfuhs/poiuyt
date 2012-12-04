@@ -77,13 +77,19 @@
  		}
  		
  		if((*string=strstr(buff,"///"))!=NULL)
+ 		{
  			*string += 3;
+		}
+		
  		else if((*string=strstr(buff,"*"))!=NULL)
- 			*string += 1;
+ 		{
+			*string += 1;
+		}
+		
 		return -1; 		
  }
 
-int makeDoc(Ens* ens)
+int makeDoc(Ens * ens)
 {
 	FILE* fin;
 	FILE* fout;
@@ -97,20 +103,32 @@ int makeDoc(Ens* ens)
 	fin = fusionFile(ens-> path_file_c, ens-> path_file_h, fout);
 
 	Fonc_num = 0;
-	while(feof(fin)==0)
+	
+	while(feof(fin) == 0)
 	{
-		fgets(buffer,1024,fin);		
+		fgets(buffer, 1024, fin);	
+			
 		if(strstr(buffer,"/**") != NULL )
 		{
 			read_com = 1;
 			continue;			
 		}
+		
 		if( strstr(buffer,"///")!=NULL)
+		{
 			read_com = 2;
+		}
+		
 		if( strstr(buffer,"*/")!=NULL || read_com == 3)
 		{
+			if(list_balise != 0)
+			{
+				newBalise(fout, -3, NULL);
+				list_balise = 0;
+			}
+			
 			read_com = 0;
-			newBalise(fout,10,NULL);
+			newBalise(fout, 10, NULL);
 			continue;		
 		}		
 	
@@ -149,7 +167,7 @@ int makeDoc(Ens* ens)
 		
 		if(read_com == 2)
 		{
-			read_com = 0;
+			read_com = 3;
 		}
 	}
 	
