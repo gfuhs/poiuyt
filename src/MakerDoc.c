@@ -113,24 +113,26 @@ int makeDoc(Ens * ens)
 			read_com = 1;
 			continue;			
 		}
-		
-		if( strstr(buffer,"///")!=NULL)
+		else if( strstr(buffer,"///")!=NULL)
 		{
 			read_com = 2;
 		}
-		
-		if( strstr(buffer,"*/")!=NULL || read_com == 3)
+		else if( strstr(buffer,"*/")!=NULL )
+		{
+			read_com = 3;
+			continue;
+		}		
+		else if(read_com == 3)
 		{
 			if(list_balise != 0)
 			{
 				newBalise(fout, -3, NULL);
 				list_balise = 0;
 			}
-			
 			read_com = 0;
 			newBalise(fout, 10, NULL);
-			continue;		
-		}		
+			continue;
+		}
 	
 		if( read_com != 0)
 		{

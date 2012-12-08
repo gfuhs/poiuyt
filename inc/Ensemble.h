@@ -1,6 +1,8 @@
 #ifndef ENSEMBLE_H
 #define ENSEMBLE_H
 
+#include "TreeChar.h"
+
 typedef struct cel {
 	char file[100];	
 	char path_file_c[100];
@@ -19,7 +21,7 @@ typedef struct cel {
  * Library which get a structure containing the files of the same module.
  */
 
-int AddEnsemble(ListEns* list, char *name);
+int AddEnsemble(ListEns* list, char *name, const TreeChar* tree);
 int RemoveEnsemble(ListEns* list);
 
 #endif
