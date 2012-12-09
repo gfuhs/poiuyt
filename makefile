@@ -6,7 +6,7 @@ inc = -I./inc
 
 
 #Voici tous les fichiers du projet (*.o)
-PROJET = MakerDoc.o Html.o Css.o Main.o ModifFile.o Ensemble.o
+PROJET = MakerDoc.o Html.o Css.o Main.o ModifFile.o Ensemble.o TreeChar.o
 #le nom de l'exécutable
 EXEC = docmycode
 
