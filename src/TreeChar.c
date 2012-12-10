@@ -157,8 +157,8 @@ int path_file(const TreeChar* tree, char* file_search, char* buff,int pos_buff)
 		if(strcmp(file_search,tree->name) == 0)
 				return 1;
 		
-		
-		strcat(buff,"/\0");
+		if(pos_buff != 0)
+		  strcat(buff,"/\0");
 		taille = strlen(buff);
 		for (index=tree->children;index!=NULL;index=index->next)
 			if(path_file(index->element,file_search,buff,taille))

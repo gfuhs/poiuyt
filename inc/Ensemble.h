@@ -21,7 +21,8 @@ typedef struct cel {
  * Library which get a structure containing the files of the same module.
  */
 
-int AddEnsemble(ListEns* list, char *name, const TreeChar* tree);
+int AddEnsemble(ListEns* list, char *name, const TreeChar* tree, char* path);
 int RemoveEnsemble(ListEns* list);
+void GenerateEnsemble(ListEns* list,const TreeChar* tree,const TreeChar* node,char* path);
 
 #endif
