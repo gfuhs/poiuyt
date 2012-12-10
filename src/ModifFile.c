@@ -122,13 +122,13 @@ FILE* fusionFile(char *fileC, char* fileH, FILE* fileHtml)
  	
  	if( (fc = fopen(fileC, "r")) == NULL) 
  	{
-	 	fprintf(stderr, "Erreur lors de l'ouverture d'un fichier\n");
+	 	fprintf(stderr, "Erreur lors de l'ouverture d'un fichier %s\n",fileC);
  		exit(EXIT_FAILURE);
  	}	
  	
  	if( (fh = fopen(fileH, "r")) == NULL) 
  	{
-	 	fprintf(stderr, "Erreur lors de l'ouverture d'un fichier\n");
+	 	fprintf(stderr, "Erreur lors de l'ouverture d'un fichier %s\n",fileH);
  		exit(EXIT_FAILURE);
  	}	
  	

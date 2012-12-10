@@ -28,7 +28,7 @@
  
  void copieCom(FILE* fin, FILE* fout, FILE* html);
  
-  void close_fusion(FILE* file);
+void close_fusion(FILE* file);
  
  #endif
  

@@ -61,6 +61,14 @@ int AddEnsemble(ListEns* list, char *name, const TreeChar* tree, char* path)
 	   return 1;		
 }
 
+/*******
+ ******* \fn	void GenerateEnsemble(ListEns* list,const TreeChar* tree, const TreeChar* node,char* path)
+  ****** \brief	generate a List of Listens to a TreeChar
+   ***** \param	list is a pointer of  the list to do
+    **** \param	tree is the root of the tree since to do the list
+     *** \param	node is the node of tree where we are actually
+      ** \param	path is the way of acces to the root of the tree in the system arborescence
+       */ 
 void GenerateEnsemble(ListEns* list,const TreeChar* tree,const TreeChar* node, char* path)
 {
 	struct list* index;

@@ -17,10 +17,15 @@ void method_fich_pass_argument(int argc,char* argv[])
 	int i;
 	ListEns list = NULL;
 	TreeChar* arborescence = NULL;
+	FILE* index;
 	
-	mkdir("doc",S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
-	makeCss(0,"doc/");
+	mkdir("./doc/",S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+	makeCss(0,"./doc/");
 	arborescence = CreateTree(".");
+	index=newHtml("./doc/index.html");
+	print_TreeChar(index, arborescence, 0);
+	closeHtml(index);
+	
 	for(i=optind;i<argc;i++)
 	{
 		if(AddEnsemble(&list, argv[i],arborescence,"./")==0)
@@ -43,12 +48,20 @@ void method_chemin_projet(char* path)
 	ListEns index = NULL;
 	TreeChar* arborescence = NULL;
 	char buff[1024];
+	FILE* index;
+	
 	buff[0]='\0';
 	strcat(buff,path);
 	strcat(buff,"doc/");
 	mkdir(buff,S_IRWXU | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH);
+	
 	makeCss(0,buff);
 	arborescence = CreateTree(path);
+	strcat(buff,"index.html");	
+	index=newHtml(buff);
+	print_TreeChar(index, arborescence, 0);
+	closeHtml(index);
+	
 	GenerateEnsemble(&list,arborescence,arborescence,path);
 	index=list;
 	while(index!=NULL) 
@@ -78,10 +91,10 @@ int main (int argc, char* argv[])
 		switch(optch)
 		{
 			case 'v' :
-				printf("Version 1.3 de MackerDoc\n");
+				printf("Version 1.3.1 de MackerDoc\n");
 				return 0;
 			case 'h' :
-				printf("En attente de création");
+				printf("En attente d'écriture");
 				return 0;
 			default:
 				printf("Option non reconnue\n Veuillez utiliser l'option -h ou --help\n");
