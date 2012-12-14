@@ -6,13 +6,13 @@
 #include <unistd.h>
 
 /**
- * \fn		int ordreFile(char* file, char* name)
+ * \fn		int fileOrder(char* file, char* name)
  * \brief	Function which determinate if the file contains the head tag	
  * \param		file	is the name of the file to scan
  * \param		name 	is the name of the module if the head tag is found 
  * \return		Retourne 1 si oui sinon 0
  */
-int ordreFile(char* file, char* name)
+int fileOrder(char* file, char* name)
 {
 	char buffer[1024];
 	char *pos;
@@ -47,14 +47,15 @@ int ordreFile(char* file, char* name)
 }
 
 /**
- * \fn         void copieCom(FILE* fin, FILE* fout, FILE* html)
+ * \fn         void copyCom(FILE* fin, FILE* fout, FILE* html)
  * \brief	   Function which copy the comments of a file in another and do the list of the functions from the source file. 
  * \param      fin	is a pointer on the input file.
  * \param      fout	is a pointer on the output file.
  * \param      html	is a pointer on the html file which contains the documentation of the input file.  
  */
-void copieCom(FILE* fin, FILE* fout, FILE* html)
+void copyCom(FILE* fin, FILE* fout, FILE* html)
 {
+	int fnfound = 0;
 	char buffer[1024];
 	char code_read = 0;
 	char* s;
@@ -68,35 +69,40 @@ void copieCom(FILE* fin, FILE* fout, FILE* html)
  				code_read = 1;
 			}
 			
- 			else if(strstr(buffer,"///") != NULL && buffer[0] == '/') 
+ 			else if(strstr(buffer, "///") != NULL && buffer[0] == '/') 
  			{
  				code_read = 2;
 			}
 			
 			else if(code_read == 2)
 			{
-			  code_read = 0;
-			  fprintf(fout, "\n\n");
+				code_read = 0;
+				fprintf(fout, "\n\n");
 			}
 
  			if(code_read != 0)
 			{
 				fprintf(fout, "%s", buffer);
 			  
-				if( (s = strstr(buffer,"\\fn")) != NULL) 
+				if( (s = strstr(buffer, "\\fn")) != NULL) 
 				{
 					s += 3;
 					newBalise(html, 12, s);
+					fnfound = 1;
 				} 		
+				
+				else if ((s = strstr(buffer, "\\brief")) != NULL && fnfound == 1)
+				{
+					s += 6;
+					newBalise(html, -1, s);
+				}
 			  		
 				if(strstr(buffer,"*/")!= NULL)
 				{
 					code_read = 2;
 				}
 			}
- 			
  	}
- 		
 } 
 
 /**
@@ -114,7 +120,7 @@ FILE* fusionFile(char *fileC, char* fileH, FILE* fileHtml)
 	FILE* fh;
 	char string[1024];
 	
- 	if( (tmp = fopen("tmp", "w")) == NULL) 
+ 	if( (tmp = fopen(".tmp", "w")) == NULL) 
  	{
 	 	fprintf(stderr, "Erreur lors de la création d'un fichier temporaire\n");
  		exit(EXIT_FAILURE);
@@ -122,46 +128,49 @@ FILE* fusionFile(char *fileC, char* fileH, FILE* fileHtml)
  	
  	if( (fc = fopen(fileC, "r")) == NULL) 
  	{
-	 	fprintf(stderr, "Erreur lors de l'ouverture d'un fichier %s\n",fileC);
+	 	fprintf(stderr, "Erreur lors de l'ouverture d'un fichier\n");
  		exit(EXIT_FAILURE);
  	}	
  	
  	if( (fh = fopen(fileH, "r")) == NULL) 
  	{
-	 	fprintf(stderr, "Erreur lors de l'ouverture d'un fichier %s\n",fileH);
+	 	fprintf(stderr, "Erreur lors de l'ouverture d'un fichier\n");
  		exit(EXIT_FAILURE);
  	}	
  	
  	Fonc_num = 0;
  	
-	if(ordreFile(fileC, string))
+	if(fileOrder(fileC, string))
 	{
 		newBalise(fileHtml, 0, string);
 		newBalise(fileHtml, -2, "Fonction(s)");
 	  
-		copieCom(fc, tmp, fileHtml);
-		copieCom(fh, tmp, fileHtml);
+		copyCom(fc, tmp, fileHtml);
+		copyCom(fh, tmp, fileHtml);
 	}
 	
-	else if (ordreFile(fileH, string))
+	else if (fileOrder(fileH, string))
 	{
 		newBalise(fileHtml, 0, string);
 		newBalise(fileHtml, -2, "Fonction(s)");
-		copieCom(fh, tmp, fileHtml);
-		copieCom(fc, tmp, fileHtml);	  
+		copyCom(fh, tmp, fileHtml);
+		copyCom(fc, tmp, fileHtml);	  
 	}
 	
 	else
 	{
-		fprintf(stderr,"Balise d'en-tête introuvable pour un ensemble de fichier\n");
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "Balise d'en-tête introuvable pour le fichier %s ou le fichier %s\n", fileC, fileH);
+		newBalise(fileHtml, 0, string);
+		newBalise(fileHtml, -2, "Fonction(s)");
+	  	copyCom(fc, tmp, fileHtml);
+		copyCom(fh, tmp, fileHtml);
 	}
 	
-	fclose (fc);
+	fclose(fc);
 	fclose(fh); 	
 	fclose(tmp);
 	
-	if( (tmp = fopen("tmp", "r")) == NULL) 
+	if( (tmp = fopen(".tmp", "r")) == NULL) 
 	{
 	 	fprintf(stderr, "Erreur lors de la création d'un fichier temporaire\n");
  		exit(EXIT_FAILURE);
@@ -180,5 +189,5 @@ FILE* fusionFile(char *fileC, char* fileH, FILE* fileHtml)
   void close_fusion(FILE* file)
   {
     fclose(file);
-    unlink("tmp");
+    unlink(".tmp");
   }
