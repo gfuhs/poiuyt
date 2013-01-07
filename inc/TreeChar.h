@@ -7,8 +7,8 @@
  * \file      TreeChar.c
  * \author    Fuhs
  * \author    Moreau
- * \version   2.0
- * \date      2 Décembre 2012
+ * \version   3.0
+ * \date      11 Décembre 2012
  * \brief     Functions helping to manage the analysis on the tree of the project
  *
  * Library which contains functions of manipulation of tree, for the files of the project.

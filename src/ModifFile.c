@@ -1,13 +1,13 @@
-#include "ModifFile.h"
-#include "Html.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include "ModifFile.h"
+#include "Html.h"
 
 /**
  * \fn		int fileOrder(char* file, char* name)
- * \brief	Function which determinate if the file contains the head tag	
+ * \brief	Function which determinates if the file contains the head tag	
  * \param		file	is the name of the file to scan
  * \param		name 	is the name of the module if the head tag is found 
  * \return		Retourne 1 si oui sinon 0
@@ -26,26 +26,182 @@ int fileOrder(char* file, char* name)
  	
 	while(feof(tmp) == 0)
  	{
- 			fgets(buffer, 1024, tmp);
+ 		fgets(buffer, 1024, tmp);
  			
-			if( (pos = strstr(buffer, "\\file")) != NULL)
-			{
-			    pos += 5;
-			    strcpy(name, pos);
-			    fclose(tmp);
-			    return 1;
-			}
+		if( (pos = strstr(buffer, "\\file")) != NULL)
+		{
+			pos += 5;
+			strcpy(name, pos);
+			fclose(tmp);
+			return 1;
+		}
 			
-			else if(strstr(buffer, "\\fn") != NULL)
-			{
-			    fclose(tmp);
-			    return 0;
-			}
+		else if(strstr(buffer, "\\fn") != NULL)
+		{
+			fclose(tmp);
+			return 0;
+		}
 	}
 	
 	return 0;
 }
 
+typedef struct cel{
+	char* element;
+	struct cel* next;	
+}CelG,*ListG;
+
+/** 
+ * \fn		void initTab(void* tab[])
+ *\bief		Function init the tab at null
+ *\param		tab is the tab at init
+ */
+ void initTab(void* tab[])
+ {
+ 	int i;
+ 	for(i=0;i<9;i++)
+ 		tab[i] = NULL;	
+ }
+
+/**
+ * \fn 		void orderingBalise(void* tab[],char* buff)
+ * \brief		Function stocke in tab the buff 
+ * \param		tab is tab of stockage of element
+ * \param		buff is the buffer of readinfg of the file reading
+ */
+ void orderingBalise(void* tab[], char* buff)
+ {
+ 	char* tmp;
+ 	ListG list_tmp;
+	ListG index;
+
+	if(strstr(buff,"/**")!=NULL || strstr(buff,"*/")!=NULL) 
+		return ; 	
+ 	
+ 	if( (tmp = (char*) malloc(sizeof(char)*(strlen(buff)+1))) == NULL)
+	{
+		fprintf(stderr,"Mémoire insuffisante");
+		exit(1);
+	}
+	strcpy(tmp,buff);
+	
+ 	if(strstr(buff,"\\file")!=NULL) 
+ 	{
+		 tab[0] = tmp;
+		 return ;
+ 	}	
+ 	if(strstr(buff,"\\fn")!=NULL) 
+ 	{
+ 		tab[0] = tmp;
+ 		return;
+ 	}	
+  	if(strstr(buff,"\\author")!=NULL) 
+ 	{
+		if( (list_tmp = (ListG)malloc(sizeof(CelG)) ) == NULL)
+		{
+			fprintf(stderr,"Mémoire insuffisante");
+			exit(1);
+		}
+		list_tmp->element = tmp;
+		list_tmp->next=tab[1];
+ 		tab[1] = list_tmp;
+ 		return;
+ 	}	
+ 	if(strstr(buff,"\\version")!=NULL) 
+ 	{
+ 		tab[2] = tmp;
+ 		return;
+ 	}	
+ 	if(strstr(buff,"\\date")!=NULL) 
+ 	{
+ 		tab[3] = tmp;
+ 		return;
+ 	}	
+ 	 if(strstr(buff,"\\brief")!=NULL) 
+ 	{
+ 		tab[4] = tmp;
+ 		return;
+ 	}	
+ 	if(strstr(buff,"\\param")!=NULL) 
+ 	{
+		if( (list_tmp = (ListG)malloc(sizeof(CelG)) ) == NULL)
+		{
+			fprintf(stderr,"Mémoire insuffisante");
+			exit(1);
+		}
+		list_tmp->element = tmp;
+		list_tmp->next=tab[6]; 		
+ 		tab[6] = list_tmp;
+ 		return ;
+ 	}	
+ 	if(strstr(buff,"\\return")!=NULL) 
+ 	{
+ 		tab[7] = tmp;
+ 		return;
+ 	}	
+ 	if(strstr(buff,"\\bug")!=NULL) 
+ 	{
+		if( (list_tmp = (ListG)malloc(sizeof(CelG)) ) == NULL)
+		{
+			fprintf(stderr,"Mémoire insuffisante");
+			exit(1);
+		}
+		list_tmp->element = tmp;
+		list_tmp->next=tab[8]; 		
+ 		tab[8] = list_tmp;
+ 		return ;
+ 	}	
+ 	
+	if( (list_tmp = (ListG)malloc(sizeof(CelG)) ) == NULL)
+	{
+		fprintf(stderr,"Mémoire insuffisante");
+		exit(1);
+	}
+	list_tmp->element = tmp;
+	list_tmp->next = NULL;
+	for(index=tab[5];index!=NULL && index->next!=NULL;index= index->next)
+	  ;
+	if(index == NULL)
+	  tab[5] = list_tmp;
+	else
+	  index->next = list_tmp;
+ }  
+
+/**
+ *\fn		void printTab(void* tab[] , FILE* out)
+ *\brief		Function print the tab in flux out
+ *\param		tab is the tab at printing
+ *\param		out is the flux where print the tab
+ */
+void printTab(void* tab[], FILE* out)
+{
+	int i;
+	ListG tmp;
+	fprintf(out,"/**\n");
+	for(i=0;i<9;i++)
+	{
+		if(tab[i]==NULL) 
+			continue;
+		if(i==1 || i==5 || i==6 || i==8)
+		{
+			while(tab[i]!=NULL)
+			{
+				fprintf(out,"%s",((ListG)tab[i])->element);
+				tmp = tab[i];
+				tab[i]=((ListG)tab[i])->next;
+				free(tmp);
+			}
+		}	
+		else
+		{
+			fprintf(out,"%s",(char*)tab[i]);
+			free(tab[i]);
+			tab[i]= NULL;	
+		}			
+	}	
+	fprintf(out,"*/\n\n\n");
+} 
+ 
 /**
  * \fn         void copyCom(FILE* fin, FILE* fout, FILE* html)
  * \brief	   Function which copy the comments of a file in another and do the list of the functions from the source file. 
@@ -59,49 +215,51 @@ void copyCom(FILE* fin, FILE* fout, FILE* html)
 	char buffer[1024];
 	char code_read = 0;
 	char* s;
-
+	void* tab[9] ;
+	
+	initTab(tab); 
 	while(feof(fin) == 0)
  	{
- 			fgets(buffer, 1024, fin);
+		fgets(buffer, 1024, fin);
 
- 			if(strstr(buffer,"/**") != NULL && buffer[0] == '/')
- 			{
- 				code_read = 1;
-			}
-			
- 			else if(strstr(buffer, "///") != NULL && buffer[0] == '/') 
- 			{
- 				code_read = 2;
-			}
-			
-			else if(code_read == 2)
-			{
-				code_read = 0;
-				fprintf(fout, "\n\n");
-			}
+		if(strstr(buffer,"/**") != NULL && buffer[0] == '/')
+		{
+			code_read = 1;
+		}
+		
+		else if(strstr(buffer, "///") != NULL && buffer[0] == '/') 
+		{
+			code_read = 2;
+		}
+		
+		else if(code_read == 2)
+		{
+			code_read = 0;
+			printTab(tab, fout);
+		}
 
- 			if(code_read != 0)
+		if(code_read != 0)
+		{
+			orderingBalise(tab, buffer);
+		  
+			if( (s = strstr(buffer, "\\fn")) != NULL) 
 			{
-				fprintf(fout, "%s", buffer);
-			  
-				if( (s = strstr(buffer, "\\fn")) != NULL) 
-				{
-					s += 3;
-					newBalise(html, 12, s);
-					fnfound = 1;
-				} 		
+				s += 3;
+				newBalise(html, 12, s);
+				fnfound = 1;
+			} 		
+			
+			else if ((s = strstr(buffer, "\\brief")) != NULL && fnfound == 1)
+			{
+				s += 6;
+				newBalise(html, -1, s);
+			}
 				
-				else if ((s = strstr(buffer, "\\brief")) != NULL && fnfound == 1)
-				{
-					s += 6;
-					newBalise(html, -1, s);
-				}
-			  		
-				if(strstr(buffer,"*/")!= NULL)
-				{
-					code_read = 2;
-				}
+			if(strstr(buffer,"*/")!= NULL)
+			{
+				code_read = 2;
 			}
+		}
  	}
 } 
 

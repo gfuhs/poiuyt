@@ -48,23 +48,96 @@ void putSpace (FILE * file, int nb)
 	}
 }
 
+void addBolt(char* String)
+{
+    char* pos;
+    char* string_save = String;
+    unsigned char ind = 0;
+    char buffer[1024];
+ 
+    buffer[0]='\0';
+    if( strstr(String,"\\g ") == NULL)
+      return;
+
+    while ((pos = strstr(String,"\\g "))!= NULL)
+    {
+      *pos = '\0';
+      strcat(buffer,String);
+      if(ind%2==0)
+	strcat(buffer," <b> ");
+      else
+	strcat(buffer," </b> ");
+      ind++;
+      String = pos+3;
+    }
+    strcat(buffer,String);
+    if(ind%2==1)
+      strcat(buffer," </b> ");
+    *string_save = '\0' ;
+    strcat(string_save,buffer);
+}
+
+void addItalic(char* String)
+{
+    char* pos;
+    char* string_save = String;
+    unsigned char ind = 0;
+    char buffer[1024];
+
+    buffer[0]='\0';
+    if( strstr(String,"\\i") == NULL)
+      return;
+
+    while ((pos = strstr(String,"\\i "))!= NULL)
+    {
+      *pos = '\0';
+      strcat(buffer,String);
+      if(ind%2==0)
+	strcat(buffer," <i> ");
+      else
+	strcat(buffer," </i> ");
+      ind++;
+      String = pos+3;
+    }
+    strcat(buffer,String);
+    if(ind%2==1)
+      strcat(buffer," </i> ");
+    *string_save='\0';
+    strcat(string_save,buffer);
+}
+
+void modifString(char* String)
+{
+  addBolt(String);
+  addItalic(String);
+}
 
 void newBalise(FILE* file, int code, char* String)
 {
+	int size;
 	char * tmp;
+	char buffer[1024];
+
+	if(String != NULL)
+	  modifString(String);
 	
 	switch(code) 
 	{
 		case -3 :
 			putTab(file, 3);
-			fprintf(file, "</ol>\n\n");
+			fprintf(file, "</ul>\n\n");
 			break;	
 
 		case -2 :	
 			putTab(file, 3);
-			fprintf(file, "<b>%s :</b>\n", String);
+			
+			if(String != NULL)
+			{
+				fprintf(file, "<b>%s :</b>\n", String);
+			}
+			
 			putTab(file, 3);
-			fprintf(file, "<ol>\n");
+			fprintf(file, "<ul>\n");
 			break;
 	
 		case -1 :
@@ -85,7 +158,7 @@ void newBalise(FILE* file, int code, char* String)
 			}
 			
 			strcpy(tmp, String);
-			tmp[strlen(String) - 1] = '\0';
+			tmp[strlen(String) - 3] = '\0';
 			
 			fprintf(file, "<h1>%s</h1>\n", tmp);
 			putSpace(file, 4);
@@ -98,6 +171,7 @@ void newBalise(FILE* file, int code, char* String)
 			putTab(file, 3);
 			fprintf(file, "<br>\n\n");
 			break;
+			
 		case 3 :
 			putTab(file, 3);
 			fprintf(file, "<b>Date :</b> %s", String);
@@ -118,9 +192,10 @@ void newBalise(FILE* file, int code, char* String)
 
 		case 5 :
 			putTab(file, 3);
-			fprintf(file, "<p>\n%s", String);
+			fprintf(file, "<b>Details :</b>\n");
 			putTab(file, 3);
-			fprintf(file, "</p>\n\n");
+			fprintf(file, "<br>\n");
+			fprintf(file, "\t%s", String);
 			putSpace(file, 1);
 			break;
 
@@ -137,9 +212,9 @@ void newBalise(FILE* file, int code, char* String)
 			}
 			
 			strcpy(tmp, String);
-			tmp[strlen(String) - 1] = '\0';
+			tmp[strlen(String) - 2] = '\0';
 			
-			fprintf(file, "<h2 id=\"fonc_%d\">%s</h2>\n", Fonc_num, tmp);
+			fprintf(file, "<h2 id=\"fonc_%d\"><u>%s</u></h2>\n", Fonc_num, tmp);
 			Fonc_num++;
 			
 			free(tmp);
@@ -158,7 +233,7 @@ void newBalise(FILE* file, int code, char* String)
 			}
 			
 			strcpy(tmp, String);
-			tmp[strlen(String) - 1] = '\0';
+			tmp[strlen(String) - 2] = '\0';
 			
 			fprintf(file, "<li>%s</li>\n", tmp);
 			free(tmp);
@@ -177,7 +252,7 @@ void newBalise(FILE* file, int code, char* String)
 			}
 			
 			strcpy(tmp, String);
-			tmp[strlen(String) - 1] = '\0';
+			tmp[strlen(String) - 2] = '\0';
 			
 			fprintf(file, "<b>Return</b><br><span>%s</span>\n", tmp);
 			free(tmp);
@@ -200,7 +275,7 @@ void newBalise(FILE* file, int code, char* String)
 			}
 			
 			strcpy(tmp, String);
-			tmp[strlen(String) - 1] = '\0';
+			tmp[strlen(String) - 2] = '\0';
 			
 			fprintf(file, "<b>Bug</b>%s", tmp);
 			free(tmp);
@@ -232,7 +307,7 @@ void newBalise(FILE* file, int code, char* String)
 			break;
 			
 		case 12 :
-			putTab(file, 3);
+			putTab(file, 4);
 			
 			tmp = (char *)malloc(sizeof(char) * (strlen(String) + 1));
 			if(tmp == NULL)
@@ -242,12 +317,52 @@ void newBalise(FILE* file, int code, char* String)
 			}
 			
 			strcpy(tmp, String);
-			tmp[strlen(String) - 1] = '\0';
+			tmp[strlen(String) - 2] = '\0';
 			
 			fprintf(file, "<li><a href=\"#fonc_%d\">%s</a></li>\n", Fonc_num, tmp);
 			Fonc_num++;
 			free(tmp);
 			break;
 		
+		case 13 :
+			putTab(file, 4);
+			
+			tmp = (char *)malloc(sizeof(char) * (strlen(String) + 1));
+			if(tmp == NULL)
+			{	
+				fprintf(stderr, "Error in memory\n");
+				exit(1);
+			}
+			
+			strcpy(tmp, String);
+			tmp[strlen(String)] = '\0';
+			
+			fprintf(file, "<li>%s</li>\n", tmp);
+			free(tmp);
+			break;
+			
+		case 14 :
+			putTab(file, 4);
+			
+			tmp = (char *)malloc(sizeof(char) * (strlen(String) + 1));
+			if(tmp == NULL)
+			{	
+				fprintf(stderr, "Error in memory\n");
+				exit(1);
+			}
+			
+			strcpy(tmp, String);
+			tmp[strlen(String)] = '\0';
+			
+			buffer[0] = '\0';
+			strcat(buffer, "./");
+			strcat(buffer, String);
+			size = strlen(buffer);
+			buffer[size - 1] = '\0';
+			strcat(buffer, "html");
+			
+			fprintf(file, "<li><a href=\"%s\">%s</a></li>\n", buffer, tmp);
+			free(tmp);
+			break;
 	}
 }

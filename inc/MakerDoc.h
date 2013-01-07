@@ -7,8 +7,8 @@
  * \file      MakerDoc.c
  * \author    Fuhs
  * \author    Moreau
- * \version   2.0
- * \date      2 Décembre 2012
+ * \version   3.0
+ * \date      11 Décembre 2012
  * \brief     Define the functions which create the documentation.
  *
  * Functions which create an html file by the documentation of a file.

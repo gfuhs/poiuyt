@@ -14,15 +14,17 @@ typedef struct cel {
  * \file      Ensemble.c
  * \author    Fuhs
  * \author    Moreau
- * \version   2.0
- * \date      2 Décembre 2012
+ * \version   3.0
+ * \date      11 Décembre 2012
  * \brief     Put together the file belonging to the same module.
  *
  * Library which get a structure containing the files of the same module.
  */
 
 int AddEnsemble(ListEns* list, char *name, const TreeChar* tree, char* path);
+
 int RemoveEnsemble(ListEns* list);
+
 void GenerateEnsemble(ListEns* list,const TreeChar* tree,const TreeChar* node,char* path);
 
 #endif

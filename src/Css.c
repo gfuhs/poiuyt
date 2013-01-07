@@ -5,17 +5,28 @@
 
 void themeCreationD(FILE * fin)
 {
-	fprintf(fin, "body\n{\n\tbackground-color: black;\n\tbackground-image: url(images/bg.jpg);\n\tfont-family: Helvetica, Arial, sans-serif;\n\tfont-size: 14px;\n\tline-height: 1.6em;\n\tcolor: white;\n}\n\n\n");
+	fprintf(fin, "body\n{\n\tbackground-color: black;\n\tbackground-image: url(\"http://i.imgur.com/38y9Q.jpg\");\n\tfont-family: Helvetica, Arial, sans-serif;\n\tfont-size: 14px;\n\tline-height: 1.6em;\n\tcolor: white;\n}\n\n\n");
 	fprintf(fin, "a\n{\n\tcolor: white;\n}\n\n");
-	fprintf(fin, "#presentation\n{\n\tdisplay: block;\n\tbackground: url(images/divbg.png);\n\tposition: relative;\n\twidth: 800px;\n\tmargin: 10px 0 10px 250px;\n}\n\n");
+	fprintf(fin, "#presentation\n{\n\tdisplay: block;\n\tbackground: url(\"http://i.imgur.com/iSc5Z.png\");\n\tposition: relative;\n\twidth: 800px;\n\tmargin: 10px 0 10px 250px;\n}\n\n");
 	fprintf(fin, "#presentation h1\n{\n\tdisplay: block;\n\tfloat: left;\n\tmargin: 45px 0 0 300px;\n\tposition: relative;\n\ttext-shadow: black 0em 0.1em 0.1em;\n\tfont-size: 28px;\n\tletter-spacing: 0.2em\n}\n\n");
-	fprintf(fin, "li\n{\n\tlist-style-image: url(images/puce.png);\n}\n\n");
-	fprintf(fin, "ol\n{\n\tmargin: 0 0 27px 50px;\n}\n\n");
+	fprintf(fin, "li\n{\n\tlist-style-image: url(\"http://i.imgur.com/oAXKE.png\");\n}\n\n");
+	fprintf(fin, "ul\n{\n\tmargin: 0 0 27px 50px;\n}\n\n");
 	fprintf(fin, "#fonction\n{\n\tpadding: 10px 0 10px 10px;\n\tdisplay: block;\n\tfloat: left;\n\tmargin: 50px 0 10px 300px;\n\tposition: relative;\n\tbackground-color: grey;\n\twidth: 600px;box-shadow: 1px 0px 8px #000000;\n\tborder-top: 1px solid #bababa;\n\tborder-radius: 3px;\n\tmargin-bottom: 20px;\n}\n\n");
 	fprintf(fin, "#fonction h2\n{\n\tfont-size: 17px;\n\tfont-style: italic;\n\tdisplay: block;\n\tfloat: left;\n\tmargin: 0 0 0 150px;\n}\n\n");
 	fprintf(fin, "#fonction span\n{\n\tpadding: 0 0 0 40px;\n}\n\n");
 }
 
+void themeCreationLight(FILE * fin)
+{
+  fprintf(fin, "body\n{\n\tbackground-color: white;\n\tfont-family: Helvetica, Arial, sans-serif;\n\tfont-size: 14px;\n\tline-height: 1.6em;\n\tcolor: black;\n}\n\n\n");  
+  fprintf(fin, "a\n{\n\tcolor: black;\n}\n\n");
+  fprintf(fin, "#presentation\n{\n\tdisplay: block;\n\tbackground: white;\n\tposition: relative;\n\twidth: 800px;\n\tmargin: 10px 0 10px 250px;\n}\n\n");
+  fprintf(fin, "#presentation h1\n{\n\tdisplay: block;\n\tfloat: left;\n\tmargin: 45px 0 0 300px;\n\tposition: relative;\n\ttext-shadow: black 0em 0.1em 0.1em;\n\tfont-size: 28px;\n\tletter-spacing: 0.2em\n}\n\n");
+  fprintf(fin, "ul\n{\n\tmargin: 0 0 27px 50px;\n}\n\n");
+  fprintf(fin, "#fonction\n{\n\tpadding: 10px 0 10px 10px;\n\tdisplay: block;\n\tfloat: left;\n\tmargin: 50px 0 10px 300px;\n\tposition: relative;\n\tbackground-color: white;\n\twidth: 600px;box-shadow: 1px 0px 8px #000000;\n\tmargin-bottom: 20px;\n}\n\n");
+  fprintf(fin, "#fonction h2\n{\n\tfont-size: 17px;\n\tfont-style: italic;\n\tdisplay: block;\n\tfloat: left;\n\tmargin: 0 0 0 150px;\n}\n\n");
+  fprintf(fin, "#fonction span\n{\n\tpadding: 0 0 0 40px;\n}\n\n");
+}
 
 void printReset(FILE * reset)
 {
@@ -54,9 +65,10 @@ int makeCss(int theme, char* path)
 		
 	switch(theme) 
 	{
-		case 1:
-			themeCreationD(fout);
-			break;
+	    case 1: 
+	      themeCreationLight(fout);
+	      break;
+		case 0:
 		default:
 			themeCreationD(fout);
 			break;

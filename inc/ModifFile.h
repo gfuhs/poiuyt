@@ -7,8 +7,8 @@
  * \file      MofifFile.c
  * \author    Fuhs
  * \author    Moreau
- * \version   2.0
- * \date      2 Décembre 2012
+ * \version   3.0
+ * \date      11 Décembre 2012
  * \brief     Functions which manipulate files.
  *
  * Library which contains functions of manipulation of several files.
@@ -24,11 +24,11 @@
  */
  FILE* fusionFile(char *fileC, char* fileH, FILE* fileHtml);
  
- int ordreFile(char* file,char* name);
+ int fileOrder(char* file,char* name);
  
- void copieCom(FILE* fin, FILE* fout, FILE* html);
+ void copyCom(FILE* fin, FILE* fout, FILE* html);
  
-void close_fusion(FILE* file);
+ void close_fusion(FILE* file);
  
  #endif
  

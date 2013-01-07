@@ -1,6 +1,7 @@
 #On spécifie ici le chemin des codes sources (*.c) et des bibliothèques (*.h)
 SRC = src/
 INCL = inc/
+DOC = doc/
 
 inc = -I./inc 
 
@@ -24,6 +25,11 @@ $(EXEC) : $(PROJET)
 	@echo "Création de l'objet $@"
 	@$(CC) $(FLAGS) $(inc) -c $< -o $@
 
-#Règle pour supprimer l'exécutable et les .o (fichiers objets)
+#Règle pour supprimer l'exécutable et les .o (fichiers objets), ainsi que les fichiers créés par le programme.
+cleanall : clean
+	@rm -f $(EXEC)
+	@rm -f $(DOC)/*.css $(DOC)/*.html
+
+#Règle pour supprimer les .o
 clean :
-	@rm -f $(EXEC) *.o
+	@rm -f *.o

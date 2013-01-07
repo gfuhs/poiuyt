@@ -7,8 +7,8 @@
  * \file      Css.c
  * \author    Fuhs
  * \author    Moreau
- * \version   2.0
- * \date      2 Décembre 2012
+ * \version   3.0
+ * \date      11 Décembre 2012
  * \brief     Create a default css file.
  *
  * Functions with which we can create a css file with a css style defined.
@@ -25,7 +25,7 @@
  * \fn			void printReset(FILE * reset)
  * \brief		Function which reset the css style of an html page
  * \details		Function which reset the css style of an html page to improve the number of browsers which can take the css style of the program.
- * \param		reset	est le fichier dans lequel on doit écrire le code de reset css
+ * \param		reset	is the file in which the css has to be written.
  */
  void printReset(FILE * reset);
  
@@ -34,7 +34,7 @@
  * \brief      Function which create a css style already chosen
  * \param      theme	is a code to choose which style css the program have to applied
  * \param      path		is the path to the directory where the program has to write the css files	
- * \return     Un int représentant un code de sortie.
+ * \return     An integer which is a special exit code.
  */
  int makeCss(int theme, char* path);
  
